@@ -20,4 +20,10 @@ export class AppController {
   hello() {
     return 'con /sas/';
   }
+
+  @Get('tasks')
+  async tasks() {
+    console.log(await this.appService.getTasks());
+    return await this.appService.getTasks();
+  }
 }

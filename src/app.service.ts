@@ -17,4 +17,8 @@ export class AppService {
 
     return `Hello World! ${apiKey} ${dbName}`;
   }
+
+  async getTasks() {
+    return 'tasks';
+  }
 }
