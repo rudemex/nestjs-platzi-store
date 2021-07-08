@@ -10,4 +10,8 @@ export class Customer {
   lastName: string;
   @Column({ type: 'varchar', length: 255 })
   phone: string;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  createAt: Date;
+  @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+  updateAt: Date;
 }

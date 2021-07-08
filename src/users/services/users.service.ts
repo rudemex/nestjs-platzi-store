@@ -16,6 +16,8 @@ export class UsersService {
       email: 'correo@mail.com',
       password: '12345',
       role: 'admin',
+      createAt: new Date('2021-07-07 23:11:32'),
+      updateAt: new Date('2021-07-07 23:11:32'),
     },
   ];
 
@@ -39,6 +41,8 @@ export class UsersService {
     this.counterId = this.counterId + 1;
     const newUser = {
       id: this.counterId,
+      createAt: new Date('2021-07-07 23:11:32'),
+      updateAt: new Date('2021-07-07 23:11:32'),
       ...data,
     };
     this.users.push(newUser);

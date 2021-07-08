@@ -12,6 +12,8 @@ export class CustomersService {
       name: 'Nicolas',
       lastName: 'Molina',
       phone: '3111111212',
+      createAt: new Date('2021-07-07 23:11:32'),
+      updateAt: new Date('2021-07-07 23:11:32'),
     },
   ];
 
@@ -31,6 +33,8 @@ export class CustomersService {
     this.counterId = this.counterId + 1;
     const newCustomer = {
       id: this.counterId,
+      createAt: new Date('2021-07-07 23:11:32'),
+      updateAt: new Date('2021-07-07 23:11:32'),
       ...data,
     };
     this.customers.push(newCustomer);

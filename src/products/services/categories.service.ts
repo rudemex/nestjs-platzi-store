@@ -10,6 +10,8 @@ export class CategoriesService {
     {
       id: 1,
       name: 'Category 1',
+      createAt: new Date('2021-07-07 23:11:32'),
+      updateAt: new Date('2021-07-07 23:11:32'),
     },
   ];
 
@@ -29,6 +31,8 @@ export class CategoriesService {
     this.counterId = this.counterId + 1;
     const newCategory = {
       id: this.counterId,
+      createAt: new Date('2021-07-07 23:11:32'),
+      updateAt: new Date('2021-07-07 23:11:32'),
       ...data,
     };
     this.categories.push(newCategory);
