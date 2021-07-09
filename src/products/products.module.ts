@@ -15,6 +15,6 @@ import { Category } from './entities/category.entity';
   imports: [TypeOrmModule.forFeature([Product, Category, Brand], 'mysqlDB')],
   controllers: [ProductsController, CategoriesController, BrandsController],
   providers: [ProductsService, BrandsService, CategoriesService],
-  exports: [ProductsService],
+  exports: [ProductsService, TypeOrmModule],
 })
 export class ProductsModule {}
