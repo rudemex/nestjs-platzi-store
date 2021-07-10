@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { Category } from '../entities/category.entity';
-import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/category.dtos';
+import { CreateCategoryDto, UpdateCategoryDto, FilterCategoriesDto } from '../dtos/category.dtos';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
@@ -9,7 +9,14 @@ import { Repository } from 'typeorm';
 export class CategoriesService {
   constructor(@InjectRepository(Category, 'mysqlDB') private categoryRepo: Repository<Category>) {}
 
-  findAll() {
+  findAll(params?: FilterCategoriesDto) {
+    if (params.limit && params.offset) {
+      const { limit, offset } = params;
+      return this.categoryRepo.find({
+        take: limit,
+        skip: offset,
+      });
+    }
     return this.categoryRepo.find();
   }
 

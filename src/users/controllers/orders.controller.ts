@@ -1,15 +1,25 @@
-import { Controller, Get, Param, Post, Body, Put, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+  ParseIntPipe,
+  Query,
+} from '@nestjs/common';
 
 import { OrdersService } from '../services/orders.service';
-import { CreateOrderDto, UpdateOrderDto } from '../dtos/order.dto';
+import { CreateOrderDto, UpdateOrderDto, FilterOrderDto } from '../dtos/order.dto';
 
 @Controller('orders')
 export class OrdersController {
   constructor(private orderService: OrdersService) {}
 
   @Get()
-  findAll() {
-    return this.orderService.findAll();
+  findAll(@Query() params: FilterOrderDto) {
+    return this.orderService.findAll(params);
   }
 
   @Get(':id')

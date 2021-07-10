@@ -3,13 +3,20 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { Customer } from '../entities/customer.entity';
-import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
+import { CreateCustomerDto, UpdateCustomerDto, FilterCustomerDto } from '../dtos/customer.dto';
 
 @Injectable()
 export class CustomersService {
   constructor(@InjectRepository(Customer, 'mysqlDB') private customerRepo: Repository<Customer>) {}
 
-  findAll() {
+  findAll(params?: FilterCustomerDto) {
+    if (params.limit && params.offset) {
+      const { limit, offset } = params;
+      return this.customerRepo.find({
+        take: limit,
+        skip: offset,
+      });
+    }
     return this.customerRepo.find();
   }
 

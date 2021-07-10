@@ -1,8 +1,18 @@
-import { Controller, Get, Param, Post, Body, Put, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+  ParseIntPipe,
+  Query,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { CustomersService } from '../services/customers.service';
-import { CreateCustomerDto, UpdateCustomerDto } from '../dtos/customer.dto';
+import { CreateCustomerDto, UpdateCustomerDto, FilterCustomerDto } from '../dtos/customer.dto';
 
 @ApiTags('Customers')
 @Controller('customers')
@@ -10,8 +20,8 @@ export class CustomerController {
   constructor(private customersService: CustomersService) {}
 
   @Get()
-  findAll() {
-    return this.customersService.findAll();
+  findAll(@Query() params: FilterCustomerDto) {
+    return this.customersService.findAll(params);
   }
 
   @Get(':id')

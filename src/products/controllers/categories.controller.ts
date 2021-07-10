@@ -1,8 +1,18 @@
-import { Controller, Get, Param, Post, Body, Put, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Post,
+  Body,
+  Put,
+  Delete,
+  ParseIntPipe,
+  Query,
+} from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
 import { CategoriesService } from '../services/categories.service';
-import { CreateCategoryDto, UpdateCategoryDto } from '../dtos/category.dtos';
+import { CreateCategoryDto, UpdateCategoryDto, FilterCategoriesDto } from '../dtos/category.dtos';
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -10,8 +20,8 @@ export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
 
   @Get()
-  findAll() {
-    return this.categoriesService.findAll();
+  findAll(@Query() params: FilterCategoriesDto) {
+    return this.categoriesService.findAll(params);
   }
 
   @Get(':id')

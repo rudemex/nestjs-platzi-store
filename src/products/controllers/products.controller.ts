@@ -10,10 +10,10 @@ import {
   Put,
   Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation } from '@nestjs/swagger';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
 import { ParseIntPipe } from '../../common/pipe/parse-int.pipe';
-import { CreateProductDto, UpdateProductDto, FilterProductsDto } from '../dtos/products.dtos';
+import { CreateProductDto, FilterProductsDto, UpdateProductDto } from '../dtos/products.dtos';
 
 import { ProductsService } from '../services/products.service';
 

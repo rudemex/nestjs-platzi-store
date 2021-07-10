@@ -4,7 +4,7 @@ import { Repository } from 'typeorm';
 
 import { Order } from '../entities/order.entity';
 import { Customer } from '../entities/customer.entity';
-import { CreateOrderDto, UpdateOrderDto } from '../dtos/order.dto';
+import { CreateOrderDto, UpdateOrderDto, FilterOrderDto } from '../dtos/order.dto';
 
 @Injectable()
 export class OrdersService {
@@ -13,7 +13,14 @@ export class OrdersService {
     @InjectRepository(Customer, 'mysqlDB') private customerRepo: Repository<Customer>,
   ) {}
 
-  findAll() {
+  findAll(params?: FilterOrderDto) {
+    if (params.limit && params.offset) {
+      const { limit, offset } = params;
+      return this.orderRepo.find({
+        take: limit,
+        skip: offset,
+      });
+    }
     return this.orderRepo.find();
   }
 

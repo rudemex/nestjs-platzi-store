@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 
 import { User } from '../entities/user.entity';
-import { CreateUserDto, UpdateUserDto } from '../dtos/user.dto';
+import { CreateUserDto, FilterUsersDto, UpdateUserDto } from '../dtos/user.dto';
 import { ProductsService } from '../../products/services/products.service';
 import { CustomersService } from './customers.service';
 
@@ -17,11 +17,19 @@ export class UsersService {
     private customerService: CustomersService,
   ) {}
 
-  findAll() {
-    const apiKey = this.configService.get('API_KEY');
+  findAll(params?: FilterUsersDto) {
+    /*const apiKey = this.configService.get('API_KEY');
     const dataBaseName = this.configService.get('DATABASE_NAME');
     console.log('API KEY: ', apiKey);
-    console.log('DATABASE NAME: ', dataBaseName);
+    console.log('DATABASE NAME: ', dataBaseName);*/
+    if (params.limit && params.offset) {
+      const { limit, offset } = params;
+      return this.userRepo.find({
+        relations: ['customer'],
+        take: limit,
+        skip: offset,
+      });
+    }
     return this.userRepo.find({
       relations: ['customer'],
     });
